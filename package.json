@@ -1,0 +1,11 @@
+{
+  "name": "netlify-listing-updater",
+  "version": "0.1.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "netlify": "^13.1.14"
+  }
+}
