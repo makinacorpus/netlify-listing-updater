@@ -74,6 +74,8 @@ export const getNetlifyData = async () => {
     published_deploy, // {}
     build_settings, // {}
     default_domain,
+    created_at: nf_created,
+    updated_at: nf_updated,
   } = {}) => {
     const row = {
       site_id,
@@ -84,6 +86,8 @@ export const getNetlifyData = async () => {
       default_domain,
       screenshot_url,
       last_publish: published_deploy?.published_at,
+      nf_created,
+      nf_updated,
     };
 
     if (build_settings?.repo_url) {
