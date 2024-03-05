@@ -35,7 +35,7 @@ export const baserowCreate = async netlifySite => {
     `https://api.baserow.io/api/database/rows/table/${process.env.BASEROW_TABLE}/?user_field_names=true`,
     {
       method: 'POST',
-      headers: { 'content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(netlifySite),
     },
   );
@@ -47,6 +47,25 @@ export const baserowCreate = async netlifySite => {
   }
 
   return response;
+};
+
+export const baserowMarkMissing = async brRow => {
+  const response = await baserowFetch(
+    `https://api.baserow.io/api/database/rows/table/${process.env.BASEROW_TABLE}/${brRow.id}/?user_field_names=true`,
+    {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        missing_since: new Date().toISOString(),
+      }),
+    },
+  );
+
+  if (response.status >= 400) {
+    const err = await response.text();
+    console.error(JSON.stringify(brRow, null, 2));
+    throw err;
+  }
 };
 
 /**
